@@ -92,27 +92,27 @@ ggplot(insurance, aes(x=age, y=charges, colour = sex)) +
 
 ```{r, warning = FALSE, message = FALSE}
 
-# display ages 
-ggplot(insurance, aes(x=age, y=charges, colour = sex)) +
+# display gender and smoking habits 
+ggplot(insurance, aes(x=smoker, y=charges, colour = sex)) +
   geom_boxplot() +
-  labs(title="Title: Age vs Cost of Insuraunce ")
+  labs(title="Title: Smoker & Gender vs Cost of Insuraunce ")
 
 
-ggplot(insurance, aes(x=age, y=log(charges), colour = sex)) +
+ggplot(insurance, aes(x=smoker, y=log(charges), colour = sex)) +
   geom_boxplot() +
-  labs(title="Title: Age vs log(Cost of Insuraunce)")
+  labs(title="Title: Smoker & Gender vs log(Cost of Insuraunce)")
 ```
 ```{r, warning = FALSE, message = FALSE}
 
-# display ages  
-ggplot(insurance, aes(x=age, y=charges, colour = smoker)) +
+# display regions and smoking habits 
+ggplot(insurance, aes(x=region, y=charges, colour = smoker)) +
   geom_boxplot() +
-  labs(title="Title: Age vs Cost of Insuraunce")
+  labs(title="Title: Smoker & Region vs Cost of Insuraunce")
 
 
-ggplot(insurance, aes(x=age, y=log(charges), colour = smoker)) +
+ggplot(insurance, aes(x=region, y=log(charges), colour = smoker)) +
   geom_boxplot() +
-  labs(title="Title: Age vs log(Cost of Insuraunce)")
+  labs(title="Title: Smoker & Region vs log(Cost of Insuraunce)")
 ```
 
 
@@ -138,7 +138,7 @@ ggplot(insurance, aes(x=age, y=charges, colour = smoker)) +
 ```{r, warning = FALSE, message = FALSE}
 
 # display difference of cost if insurance based on age and number of children
-ggplot(insurance, aes(x=age, y=charges, colour = children)) +
+ggplot(insurance, aes(x=children, y=charges)) +
   geom_point() +
   labs(title="Title: Cost of insurance based on age and number of children")
 ```
@@ -153,12 +153,16 @@ ggplot(data = insurance) +
 
 ```
 
-```{r, warning = FALSE, message = FALSE}
+
+```{r message=FALSE, warning=TRUE}
 
 # prepare dataset for correlation matrix
 insurance_dataChange_for_correlation <- insurance
+
 # if female make it a 1 but if male make it a 0
 insurance_dataChange_for_correlation$sex <- ifelse(insurance_dataChange_for_correlation$sex=="female", 1,0)
+
+
 
 # if smoker make it a 1 but if non-smoker make it a 0
 insurance_dataChange_for_correlation$smoker <- ifelse(insurance_dataChange_for_correlation$smoker=="yes", 1,0)
@@ -181,17 +185,185 @@ ggplot(data=melted_correlation_matrix, aes(x=Var1, y=Var2, fill=value))+
   theme(
     axis.title.x = element_blank(),
     axis.title.y = element_blank()
-  )
+  )+
+  labs(title="Title: ALL REGIONS")
 
 # Based on correlation values we can see which variables have a stronger influence on the dependent variable
 # Regardless of sign, the higher the value the stronger the influence
 
 # Based on the result smoker has the strongest influencer. 
 
-#
+```
+
+
+
+
+```{r, warning = FALSE, message = FALSE}
+
+# SOUTHWEST
+
+# prepare dataset for correlation matrix
+insurance_dataChange_for_correlation_region1  <- insurance %>%
+  filter(insurance$region == "southwest")
+
+# remove region column
+insurance_dataChange_for_correlation_region1 <- select(insurance_dataChange_for_correlation_region1, -region)
+
+# if female make it a 1 but if male make it a 0
+insurance_dataChange_for_correlation_region1$sex <- ifelse(insurance_dataChange_for_correlation_region1$sex=="female", 1,0)
+
+# if smoker make it a 1 but if non-smoker make it a 0
+insurance_dataChange_for_correlation_region1$smoker <- ifelse(insurance_dataChange_for_correlation_region1$smoker=="yes", 1,0)
+
+
+
+#show entire dataset after updates
+insurance_dataChange_for_correlation_region1
+
+
+# create correlation matrix
+correlation_matrix <- round(cor(na.omit(insurance_dataChange_for_correlation_region1)),2)
+
+melted_correlation_matrix <- melt(correlation_matrix)
+
+# plot correlation matrix as heatmap
+ggplot(data=melted_correlation_matrix, aes(x=Var1, y=Var2, fill=value))+
+  geom_tile()+geom_text(aes(x=Var2, y=Var1, label=value), color="white", size=2) +
+  theme(
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()
+  )+
+  labs(title="Title: SOUTHWEST")
+
+# Based on correlation values we can see which variables have a stronger influence on the dependent variable
+# Regardless of sign, the higher the value the stronger the influence
+```
+
+```{r, warning = FALSE, message = FALSE}
+
+# SOUTHEAST
+
+# prepare dataset for correlation matrix
+insurance_dataChange_for_correlation_region1  <- insurance %>%
+  filter(insurance$region == "southeast")
+
+# remove region column
+insurance_dataChange_for_correlation_region1 <- select(insurance_dataChange_for_correlation_region1, -region)
+
+# if female make it a 1 but if male make it a 0
+insurance_dataChange_for_correlation_region1$sex <- ifelse(insurance_dataChange_for_correlation_region1$sex=="female", 1,0)
+
+# if smoker make it a 1 but if non-smoker make it a 0
+insurance_dataChange_for_correlation_region1$smoker <- ifelse(insurance_dataChange_for_correlation_region1$smoker=="yes", 1,0)
+
+
+#show entire dataset after updates
+insurance_dataChange_for_correlation_region1
+
+
+# create correlation matrix
+correlation_matrix <- round(cor(na.omit(insurance_dataChange_for_correlation_region1)),2)
+
+melted_correlation_matrix <- melt(correlation_matrix)
+
+# plot correlation matrix as heatmap
+ggplot(data=melted_correlation_matrix, aes(x=Var1, y=Var2, fill=value))+
+  geom_tile()+geom_text(aes(x=Var2, y=Var1, label=value), color="white", size=2) +
+  theme(
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()
+  )+
+  labs(title="Title: SOUTHEAST")
+
+# Based on correlation values we can see which variables have a stronger influence on the dependent variable
+# Regardless of sign, the higher the value the stronger the influence
 
 ```
 
+
+```{r, warning = FALSE, message = FALSE}
+
+# NORTHEAST
+
+# prepare dataset for correlation matrix
+insurance_dataChange_for_correlation_region1  <- insurance %>%
+  filter(insurance$region == "northeast")
+
+# remove region column
+insurance_dataChange_for_correlation_region1 <- select(insurance_dataChange_for_correlation_region1, -region)
+
+# if female make it a 1 but if male make it a 0
+insurance_dataChange_for_correlation_region1$sex <- ifelse(insurance_dataChange_for_correlation_region1$sex=="female", 1,0)
+
+# if smoker make it a 1 but if non-smoker make it a 0
+insurance_dataChange_for_correlation_region1$smoker <- ifelse(insurance_dataChange_for_correlation_region1$smoker=="yes", 1,0)
+
+
+#show entire dataset after updates
+insurance_dataChange_for_correlation_region1
+
+
+# create correlation matrix
+correlation_matrix <- round(cor(na.omit(insurance_dataChange_for_correlation_region1)),2)
+
+melted_correlation_matrix <- melt(correlation_matrix)
+
+# plot correlation matrix as heatmap
+ggplot(data=melted_correlation_matrix, aes(x=Var1, y=Var2, fill=value))+
+  geom_tile()+geom_text(aes(x=Var2, y=Var1, label=value), color="white", size=2) +
+  theme(
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()
+  )+
+  labs(title="Title: NORTHEAST")
+
+# Based on correlation values we can see which variables have a stronger influence on the dependent variable
+# Regardless of sign, the higher the value the stronger the influence
+
+```
+
+
+
+```{r, warning = FALSE, message = FALSE}
+
+# NORTHWEST
+
+# prepare dataset for correlation matrix
+insurance_dataChange_for_correlation_region1  <- insurance %>%
+  filter(insurance$region == "northwest")
+
+# remove region column
+insurance_dataChange_for_correlation_region1 <- select(insurance_dataChange_for_correlation_region1, -region)
+
+# if female make it a 1 but if male make it a 0
+insurance_dataChange_for_correlation_region1$sex <- ifelse(insurance_dataChange_for_correlation_region1$sex=="female", 1,0)
+
+# if smoker make it a 1 but if non-smoker make it a 0
+insurance_dataChange_for_correlation_region1$smoker <- ifelse(insurance_dataChange_for_correlation_region1$smoker=="yes", 1,0)
+
+
+#show entire dataset after updates
+insurance_dataChange_for_correlation_region1
+
+
+# create correlation matrix
+correlation_matrix <- round(cor(na.omit(insurance_dataChange_for_correlation_region1)),2)
+
+melted_correlation_matrix <- melt(correlation_matrix)
+
+# plot correlation matrix as heatmap
+ggplot(data=melted_correlation_matrix, aes(x=Var1, y=Var2, fill=value))+
+  geom_tile()+geom_text(aes(x=Var2, y=Var1, label=value), color="white", size=2) +
+  theme(
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()
+  )+
+  labs(title="Title: NORTHWEST")
+
+# Based on correlation values we can see which variables have a stronger influence on the dependent variable
+# Regardless of sign, the higher the value the stronger the influence
+
+```
 
 
 
