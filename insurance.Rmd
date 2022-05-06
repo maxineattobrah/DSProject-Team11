@@ -73,7 +73,7 @@ ggplot(insurance, aes(x=smoker)) +
 
 ```{r, warning = FALSE, message = FALSE}
 
-# displauy how many males vs females
+# display how many males vs females
 ggplot(insurance, aes(x=sex, colour = age)) +
   geom_bar()+
   geom_text(aes(label=stat(count)), stat="count", vjust=1.5, colour="red")+
@@ -448,16 +448,17 @@ set.seed(100)
 
 index = sample(1:nrow(insurance), 0.8*nrow(insurance)) 
 
-train = insurance[index,] # Create the training data 
+train = insurance[index,] # Create the training data
+
 test = insurance[-index,] # Create the test data
 
 
 library(glmnet)
 # Getting the independent variable
-x_train <- data.matrix(train[, c("smoker", "age", "children")])
+x_train <- data.matrix(train[, c("smoker", "age", "bmi")])
 # Getting the dependent variable
 y_train <- data.matrix(train[,c("log_charges")])
-x_test <- data.matrix(train[, c("smoker", "age", "children")])
+x_test <- data.matrix(train[, c("smoker", "age", "bmi")])
 # Getting the dependent variable
 y_test <- data.matrix(train[,c("log_charges")])
 # Setting the range of lambda values
@@ -521,6 +522,35 @@ predictions_e <- predict(elastic, s = best_lambda_e, newx = x_test)
 resid_e <- c(resid_e, predictions_e - y_test)
 #Elastic Mean Squared Error
 (mse.e <- mean(resid_e^2))
+
+###########################
+```
+
+
+```{r, warning = FALSE, message = FALSE}
+
+library(randomForest)
+
+print("Random Forest")
+samples <- rep(1:5, length.out = nrow(x_train))
+
+val.sq.rf <- c()
+
+for(k in 1:5){
+  k_x_train <- x_train[samples != k, ]
+  k_y_train <- y_train[samples != k, ]
+  k_x_val <- x_train[samples == k, ]
+  k_y_val <- y_train[samples == k,]
+  
+  rf <- randomForest(x = k_x_train, y = k_y_train)
+  print(rf)
+  val.forest <- predict(rf, newdata = k_x_val)
+
+  val.sq.forest <- c(val.sq.forest, (val.forest - k_y_val)^2)
+}
+
+mse.rf <- mean(val.sq.forest)
+
 ```
 
 
