@@ -90,29 +90,104 @@ ggplot(insurance, aes(x=age, y=charges, colour = sex)) +
   labs(title="Title: Age vs Cost of Insuraunce")
 ```
 
+
+```{r, warning = FALSE, message = FALSE}
+
+# display ages 
+
+insurance %>%
+ggplot( aes(x=age, y=charges, fill=sex)) +
+  geom_bar(stat="identity", position = position_dodge()) +
+  labs(title="Title:Cost of Insurance (Female vs Male) ")
+
+
+insurance %>%
+  filter(sex=="female") %>%
+ggplot( aes(x=age, y=charges)) +
+  geom_bar(stat="identity") +
+  labs(title="Title: Female Cost of Insurance ")
+
+
+insurance %>%
+  filter(sex=="male") %>%
+ggplot( aes(x=age, y=charges)) +
+  geom_bar(stat="identity") +
+  labs(title="Title: Male Cost of Insurance ")
+
+```
+
+
+```{r, warning = FALSE, message = FALSE}
+
+# display ages 
+ggplot(insurance, aes(x=age, y=charges, colour = sex)) +
+  geom_smooth() +
+  labs(title="Title: Age vs Cost of Insurance")
+```
+
+```{r, warning = FALSE, message = FALSE}
+
+# histograms 
+
+insurance %>%
+  filter(sex=="female") %>%
+ggplot( aes(x=charges)) +
+  geom_histogram() +
+  labs(title="Title: Female Cost of Insurance ")
+
+
+insurance %>%
+  filter(sex=="female") %>%
+ggplot( aes(x=log(charges))) +
+  geom_histogram() +
+  labs(title="Title: Female Cost of Insurance (log)")
+
+
+
+insurance %>%
+  filter(sex=="male") %>%
+ggplot( aes(x=charges)) +
+  geom_histogram() +
+  labs(title="Title: Male Cost of Insurance  ")
+
+
+insurance %>%
+  filter(sex=="male") %>%
+ggplot( aes(x=log(charges))) +
+  geom_histogram() +
+  labs(title="Title: Male Cost of Insurance (log) ")
+
+```
+
+
+
+
 ```{r, warning = FALSE, message = FALSE}
 
 # display gender and smoking habits 
-ggplot(insurance, aes(x=smoker, y=charges, colour = sex)) +
-  geom_boxplot() +
-  labs(title="Title: Smoker & Gender vs Cost of Insuraunce ")
+# ggplot(insurance, aes(x=smoker, y=charges, colour = sex)) +
+#  geom_boxplot() +
+#  labs(title="Title: Smoker & Gender vs Cost of Insuraunce ")
 
 
-ggplot(insurance, aes(x=smoker, y=log(charges), colour = sex)) +
-  geom_boxplot() +
-  labs(title="Title: Smoker & Gender vs log(Cost of Insuraunce)")
+# ggplot(insurance, aes(x=smoker, y=log(charges), colour = sex)) +
+#  geom_boxplot() +
+#  labs(title="Title: Smoker & Gender vs log(Cost of Insuraunce)")
 ```
+
+
+
 ```{r, warning = FALSE, message = FALSE}
 
 # display regions and smoking habits 
 ggplot(insurance, aes(x=region, y=charges, colour = smoker)) +
   geom_boxplot() +
-  labs(title="Title: Smoker & Region vs Cost of Insuraunce")
+  labs(title="Title: Smoker & Region vs Cost of Insurance")
 
 
 ggplot(insurance, aes(x=region, y=log(charges), colour = smoker)) +
   geom_boxplot() +
-  labs(title="Title: Smoker & Region vs log(Cost of Insuraunce)")
+  labs(title="Title: Smoker & Region vs log(Cost of Insurance)")
 ```
 
 
@@ -128,8 +203,8 @@ unique(insurance$region)
 
 ```{r, warning = FALSE, message = FALSE}
 # display difference of cost if insurance based on age and if they smoke
-ggplot(insurance, aes(x=age, y=charges, colour = smoker)) +
-  geom_point() +
+ggplot(insurance, aes(x=age, y=log(charges), colour = smoker)) +
+  geom_jitter(width =.5, height=.5)+
   labs(title="Title: Cost of insurance based on age and smoker")
 ```
 
@@ -139,7 +214,7 @@ ggplot(insurance, aes(x=age, y=charges, colour = smoker)) +
 
 # display difference of cost if insurance based on age and number of children
 ggplot(insurance, aes(x=children, y=charges)) +
-  geom_point() +
+  geom_jitter() +
   labs(title="Title: Cost of insurance based on age and number of children")
 ```
 
