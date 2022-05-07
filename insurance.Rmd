@@ -603,8 +603,12 @@ print(mse.rf)
 print(lowestMSE) 
 print(selectedMTry)
 print(selectedTrees)
+```
 
-rf <- randomForest(x = k_x_train, y = k_y_train, ntree=selectedTrees, mtry=selectedMTry)
+
+```{r, warning = FALSE, message = FALSE}
+
+(rf <- randomForest(x = k_x_train, y = k_y_train, ntree=selectedTrees, mtry=selectedMTry))
 test.forest <- predict(rf, newdata = x_test)
 
 test.sq.rf <- (test.forest - y_test)^2
