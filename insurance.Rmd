@@ -589,7 +589,7 @@ for(numTree in numTrees) {
     }
     mse.rf <- c(mse.rf, mean(val.sq.rf))
     
-    if(mse.rf < lowestMSE) {
+    if(mean(val.sq.rf) < lowestMSE) {
       lowestMSE <- mse.rf
       selectedMTry <- numVars
       selectedTrees <- numTree
@@ -600,8 +600,17 @@ for(numTree in numTrees) {
 }
 
 print(mse.rf)
-print(lowestMSE, selectedMTry, selectedTrees)
+print(lowestMSE) 
+print(selectedMTry)
+print(selectedTrees)
 
+rf <- randomForest(x = k_x_train, y = k_y_train, ntree=selectedTrees, mtry=selectedMTry)
+test.forest <- predict(rf, newdata = x_test)
+
+test.sq.rf <- (test.forest - y_test)^2
+test.mse <- mean(test.sq.rf)
+
+print(test.mse)
 
 ```
 
