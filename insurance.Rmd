@@ -566,22 +566,32 @@ library(randomForest)
 print("Random Forest")
 samples <- rep(1:5, length.out = nrow(x_train))
 
-val.sq.rf <- c()
+mse.rf <- c()
 
-for(k in 1:5){
-  k_x_train <- x_train[samples != k, ]
-  k_y_train <- y_train[samples != k, ]
-  k_x_val <- x_train[samples == k, ]
-  k_y_val <- y_train[samples == k,]
-  
-  rf <- randomForest(x = k_x_train, y = k_y_train)
-  print(rf)
-  val.forest <- predict(rf, newdata = k_x_val)
+numTrees <- c(100, 200, 300, 400, 500)
+numVarSplit <- c(1, 2, 3)
+for(numTree in numTrees) {
+  for(numVars in numVarSplit) {
+    val.sq.rf <- c()
+    for(k in 1:5){
+      k_x_train <- x_train[samples != k, ]
+      k_y_train <- y_train[samples != k, ]
+      k_x_val <- x_train[samples == k, ]
+      k_y_val <- y_train[samples == k,]
+      
+      rf <- randomForest(x = k_x_train, y = k_y_train, ntree=numTree, mtry=numVars)
+      val.forest <- predict(rf, newdata = k_x_val)
+    
+      val.sq.rf <- c(val.sq.rf, (val.forest - k_y_val)^2)
+    }
+    mse.rf <- c(mse.rf, mean(val.sq.rf))
 
-  val.sq.forest <- c(val.sq.forest, (val.forest - k_y_val)^2)
+  }
+
 }
 
-mse.rf <- mean(val.sq.forest)
+print(mse.rf)
+
 
 ```
 
