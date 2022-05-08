@@ -441,90 +441,8 @@ ggplot(data=melted_correlation_matrix, aes(x=Var1, y=Var2, fill=value))+
 ```
 
 
+#### OLS
 
-```{r, warning = FALSE, message = FALSE}
-insurance$log_charges = log(insurance$charges)
-set.seed(100) 
-
-index = sample(1:nrow(insurance), 0.8*nrow(insurance)) 
-
-train = insurance[index,] # Create the training data
-
-test = insurance[-index,] # Create the test data
-
-
-library(glmnet)
-# Getting the independent variable
-x_train <- data.matrix(train[, c("smoker", "age", "bmi")])
-# Getting the dependent variable
-y_train <- data.matrix(train[,c("log_charges")])
-x_test <- data.matrix(train[, c("smoker", "age", "bmi")])
-# Getting the dependent variable
-y_test <- data.matrix(train[,c("log_charges")])
-# Setting the range of lambda values
-lambda_seq <- 10^seq(2, -2, by = -.1)
-
-# Using glmnet function to build the ridge regression in r
-ridge <- glmnet(x_train, y_train, alpha = 0, lambda  = lambda_seq)
-# Checking the model
-summary(ridge)
-ridge_cv <- cv.glmnet(x_train, y_train, alpha = 0, lambda = lambda_seq)
-# Best lambda value
-best_lambda_r <- ridge_cv$lambda.min
-best_lambda_r
-# Rebuilding the model with optimal lambda value
-best_ridge <- glmnet(x_train, y_train, alpha = 0, lambda = best_lambda_r)
-#Ridge Regression
-#================
-coef(best_ridge)
-
-lasso <- glmnet(x_train, y_train, alpha = 1, lambda  = lambda_seq)
-# Checking the model
-summary(lasso)
-lasso_cv <- cv.glmnet(x_train, y_train, alpha = 1, lambda = lambda_seq)
-# Best lambda value
-best_lambda_l <- lasso_cv$lambda.min
-best_lambda_l
-# Rebuilding the model with optimal lambda value
-best_lasso <- glmnet(x_train, y_train, alpha = 1, lambda = best_lambda_l)
-#Lasso Regression
-#================
-coef(best_lasso)
-
-elastic <- glmnet(x_train, y_train, alpha = .5, lambda  = lambda_seq)
-# Checking the model
-summary(elastic)
-elastic_cv <- cv.glmnet(x_train, y_train, alpha = .5, lambda = lambda_seq)
-# Best lambda value
-best_lambda_e <- elastic_cv$lambda.min
-best_lambda_e 
-# Rebuilding the model with optimal lambda value
-best_elastic <- glmnet(x_train, y_train, alpha = .5, lambda = best_lambda_e)
-#Elastic Regression
-#================
-coef(best_elastic)
-
-
-resid_l <- c()
-predictions_l <- predict(lasso, s = best_lambda_l, newx = x_test)
-resid_l <- c(resid_l, predictions_l - y_test)
-#Lasso Mean Squared Error
-(mse.l <- mean(resid_l^2))
-
-resid_r <- c()
-predictions_r <- predict(ridge, s = best_lambda_r, newx = x_test)
-resid_r <- c(resid_r, predictions_r - y_test)
-#Ridge Mean Squared Error
-(mse.r <- mean(resid_r^2))
-
-resid_e <- c()
-predictions_e <- predict(elastic, s = best_lambda_e, newx = x_test)
-resid_e <- c(resid_e, predictions_e - y_test)
-#Elastic Mean Squared Error
-(mse.e <- mean(resid_e^2))
-
-###########################
-```
 ```{r, warning = FALSE, message = FALSE}
 
 library(rsample)
@@ -559,6 +477,7 @@ mse(ins_valData$charges,linear_model_predictions)
 
 ```
 
+######## Random Forest
 
 ```{r, warning = FALSE, message = FALSE}
 
