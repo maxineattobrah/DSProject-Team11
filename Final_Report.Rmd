@@ -79,6 +79,7 @@ After taking the log transformation of the data we can clearly see that after ab
 # Methods
 ## Research Questions and Preliminary Hypotheses
 Based on the research data and the data set we obtained, we analyzed the factors that may affect the insurance charges. We hypothesized 3 prominent and most probable factors (gender, age, and preconditions such as body mass index (BMI) and smoking habits) that have chances of effects on the insurance prices. We also hypothesized that the number of children and demographics do not impact the medical insurance charges. The data does not show much variation with respect to changing demographics. And the data is insufficient to analyze the variation in insurance prices based on the number of children. Therefore, based on all these factors, we came up with the following questions to conduct the research:
+
 1. Can average insurance prices be predicted based on gender, age, BMI, and smoking habits?
 2. Does gender play a role in the cost of medical insurance?
 
@@ -88,6 +89,7 @@ Based on the research data and the data set we obtained, we analyzed the factors
 We wanted to see if there is a linear relationship between our independent variables (age, bmi and smoker) and our dependent variable (charges)  so we decided to use a linear regression model. 
 
 A linear regression model makes 5 assumptions which are the Gauss Markov assumptions. These assumptions are:
+
 1. Linearity: The relationship between the dependent variable and independent variable is linear
 2. Non-colinearity: The dependent variables are independent of each other
 3. Homoscedasticity: There is not a huge change for each error of the independent variables
@@ -134,7 +136,7 @@ It was interesting to find BMI to be one of the influential variables because BM
 
 Our findings regarding age and smoking being definitive factors that affect the healthcare insurance pricing, aligns with the literature review.
 
-## Drawbacks and limitations
+## Drawbacks and Limitations
 There are limitations and drawbacks of the dataset itself. First, the dataset has a low size and therefore any models built on top of it would not be dependable or representative of the population in any manner. There are four sections of the US that are all represented within roughly ~1339 rows. Moreover, the data is also skewed in the representativeness across age groups. Age groups of 18 and 19 years have ~68 and ~69 counts whereas the other age groups are between ~22 to ~30 counts. There is a good balance between the genders as men and women are equally represented in the dataset. However, there could be a difference in the data collection method, where they could have asked people their preferred gender instead of providing only two options of ‘men’ and ‘women’ because policies or business decisions have a direct effect on underrepresented communities like the transgender people^16^. Similarly, the four regions have been represented at 324 (northeast), 325 (northwest), 325(southwest), and 364 (southeast) counts. However, these samples are very small to infer anything at a larger scale and it is difficult to generalize any finding with such a small sample of people in the dataset. Finally, the dataset has not provided any information on the methodology of data collection, storage, processing, or purpose of creating this dataset. In the absence of this information it is difficult to understand the context and nature of the data. For example, if this is self reported data, it could be possible that some smokers could have answered the questions as being ‘non-smokers’ due to the stigma surrounding smoking as a habit. In such a case, the dataset would be non-dependable as the accuracy of the information would be questionable.
 
 # Conclusion
