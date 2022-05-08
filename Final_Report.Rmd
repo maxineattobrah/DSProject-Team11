@@ -51,100 +51,52 @@ First, we explored the data to see if we can find any biases in the data. We fir
 
 ![Healthcare Costs vs. Age and Gender](Final_Screenshots/age_gender_cost_dist.png)
 
-
 In addition, we looked at the cost of Insurance (Female vs Male) and the bar plot in the figure 6 in the appendix shows that men might be paying higher in insurance most times than women. We then created histograms based on gender and both histograms are skewed to the right.  This means that the majority of the people in the dataset are paying lower insurance costs. After taking the log transformation of the data we can clearly see that after about 9.6 there is a small amount of people paying higher insurance costs which is skewing the original data to the right (refer to figure 7,8, 9, and 10 in the appendix). 
 We also looked at the cost of insurance based on age and smoking status. In the previous graph we noticed that there are alot of data points on top of each other. After using geom_jitter() and taking the log transform of the cost we can see very clearly that the people paying the most are smokers. The cost of insurance seems to be more influenced on whether or not a person smokes Majority of the people that do not smoke pay less in insurance. However, there are more people that do not smoke that have high insurance costs. Further investigation is needed to see why (refer to figure 11).
 
+![Healthcare Costs vs. Age and Smoking Habits](Final_Screenshots/age_smoking_cost_dist.png)
+We plotted the cost of insurance based on age and smoking conditions. From the box plots we can see that there is a big difference between what smokers and non-smokers have to pay regardless of age (refer to figure 14 in the appendix). The minimum insurance cost for smokers is higher than what 75% of non-smokers pay for insurance (refer to figure 12).
+
+![Age and Smoking vs. Cost of Insurance Boxplot](Final_Screenshots/age_smoking_cost_boxplot.png)
+
+Moving ahead, we wanted to check if the number of children has an affect on health insurance. We created a face wrap graph for this purpose. In this graph we break down by the number of children a person has. Each subplot represents how many children a group of people have. Here we can see that for those that do not smoke the insurance price is influenced by the number of children that they have. The less children a person has the more likely they are to have a higher insurance cost (refer to figure 13 in appendix). 
+
+![Features Correlation](Final_Screenshots/all_regions.png)
 
 
+We finally conclude our EDA by showing heatmaps of the correlation matrix (refer to figure 15). The heatmap shows which variables have the strongest correlation with a person's insurance cost. Irrespective of location, the strongest influencer is the smoker variable. The next strongest influencer is BMI. Initially, it was observed that gender had a stronger influence on charges than the number of children but as we took a deeper dive into each region that was not the case. The influence of the number of children and gender on charges depends on which region (refer to figure 16,17,18, and 19 in the appendix) a person is in.
+
+  
+  
+  
+\newpage
+  
 # Methods
+
 ## Research Questions and Preliminary Hypotheses
-Based on the research data and the data set we obtained, we analyzed the factors that may affect the insurance charges. We hypothesized 3 prominent and most probable factors (gender, age, and preconditions such as body mass index (BMI) and smoking habits) that have chances of effects on the insurance prices. We also hypothesized that the number of children and demographics do not impact the medical insurance charges. The data does not show much variation with respect to changing demographics. And the data is insufficient to analyze the variation in insurance prices based on the number of children. Therefore, based on all these factors, we came up with the following questions to conduct the research:
-
+Based on the research data and the data set we obtained, we analyzed the factors that may affect the insurance charges. We hypothesized that factors within a degree of patient’s control like BMI and smoking habits would correlate with insurance costs. This hypothesis is supported by the correlation chart from the EDA section where smoking and BMI have the strongest correlations to costs. In addition, we would like to expose another factor with a wide range that can be a potentially overwhelming factor in determining costs. From the EDA, the best candidate appears to be age as the feature with the second strongest correlation. We also hypothesized that the number of children and demographics do not impact the medical insurance charges. The data does not show much variation with respect to changing demographics. And the data is insufficient to analyze the variation in insurance prices based on the number of children. Therefore, based on all these factors, we came up with the following questions to conduct the research:
+\newline
 1. Can average insurance prices be predicted based on gender, age, BMI, and smoking habits?
-2. Does gender play a role in the cost of medical insurance?
+\newline
+2. Which model is the best predictor of insurance prices given these strongly correlated features?
 
-# Models
-## Choice of models based on regression
-### Linear Regression Model using OLS:
-We wanted to see if there is a linear relationship between our independent variables (age, bmi and smoker) and our dependent variable (charges)  so we decided to use a linear regression model. 
+## Choice of models based on data
+
+### Linear Regression Model using OLS
+
+We wanted to see if there is a linear relationship between our independent variables (age, bmi and smoker) and our dependent variable (charges) so we decided to use a linear regression model.
 
 A linear regression model makes 5 assumptions which are the Gauss Markov assumptions. These assumptions are:
+Linearity: The relationship between the dependent variable and independent variable is linear
+Non-colinearity: The dependent variables are independent of each other
+Homoscedasticity: There is not a huge change for each error of the independent variables
+Random sampling: The data is randomly sampled
+Exogeneity: Regressors are not correlated with the error term
 
-1. Linearity: The relationship between the dependent variable and independent variable is linear
-2. Non-colinearity: The dependent variables are independent of each other
-3. Homoscedasticity: There is not a huge change for each error of the independent variables
-4. Random sampling: The data is randomly sampled
-5. Exogeneity: Regressors are not correlated with the error term
-
-### Random Forest:
-The second model chosen was a random forest regression model to predict the insurance charges based on a select subset of features in the dataset. Random forest is a type of ensemble method that combines multiple decision trees that uses a technique called bagging to use random subsets of features at each decision node on each tree, then combines the results to predict regression values. Random forest models are useful because the volume of uncorrelated models helps reduce variance by avoiding overfitting training data. A random forest model can help better understand which variable(s) are best to split on first and which variables are good predictors only after another variable is determined.
-
-## Expected Model Performance
-In terms of OLS and the Gauss Markov conditions:
--------------------------------------------------------
-* Linearity: We can not test that the independent variables and the dependent have a  linear relationship. However, we believe that it is reasonable to assume that these parameters will have a linear relationship
-* Random sampling: There is no information on data that states whether the data was randomly sampled. 
-* Non-colinearity: From our correlation matrix we did not see a huge correlation between any of the dependent variables.There could be some omitted variables that could affect some of the predictor variables but the cost of insurance and vice versa.
-* Homoscedasticity: We assume that there is no huge change in error for each predictor variable
-
-### Random Forest
-Using an ensemble method like random forest is expected to produce a low MSE due to a concentrated subset of features to predict insurance cost. In addition, the choice to perform k-cross validation on different hyperparameter values is expected to further improve the model by determining the number of decision trees and the number of variables to split on at each level in the model. It’s expected that selecting the right hyperparameters will lower the Mean Squared Error while predicting the insurance cost for the test dataset.
-
-#Results
-## Summary of Models
-### OLS:
-To prevent the curve from increasing too much (causing over fitting), the OLS was tested with different proportions of training/test. The optimal ratio was 60:40. The linear regression resulted in coefficients on BMI, Smoker, and Age of 341, 23419, and 268 respectively. The MSE of the optimal OLS was 245449899.
-
-### Random Forest
-The training dataset was sampled pseudorandomly from the dataset and was 80% of the original dataset. To select hyperparameters, we tested the set of (100, 200, 300, 400, 500) for the number of trees in the random forest and (1, 2, 3) features compared at each decision node. For each configuration, we performed a 5-fold cross validation, trained the model on the data minus the fold and then validated on the data in the fold. From this, we calculated the MSE for each configuration and selected the hyperparameters with the lowest MSE. While the number of trees had negligible MSE differences, the best fit for our validation was consistently 2 variables compared at each decision split. For the test dataset, the number of trees selected for the model changed frequently. Included below are sample results of one run of the 5-fold cross validation. Finally, after selecting the hyperparameters the model was tested against the test dataset and our test MSE was consistently around ~0.091.
-
-## Plots and Tables of Results
-### OLS
-
-#table
+In addition, to test the level of generalization in the model, we experimented with several splits of training to test data ratios to determine the level of generalization to best model to balance bias-variance in the model.
 
 ### Random Forest
 
-#table
+The second model chosen was a random forest regression model to predict the insurance charges based on a select subset of features in the dataset. Random forest is a type of ensemble method that combines multiple decision trees that uses a technique called bagging to use random subsets of features at each decision node on each tree, then combines the results to predict regression values. Random forest models are useful because the volume of uncorrelated models helps reduce variance by avoiding overfitting training data. A random forest model can help better understand which variable(s) are best to split on first and which variables are good predictors only after another variable is determined. The training to test data ratio was fixed to focus on the search for best hyperparameters for the model.
 
-# Discussion
-## Discussion with respect to the preliminary hypothesis
-Our preliminary hypothesis was that gender would be a strong contributing factor to the cost of healthcare insurance. Literature represents that insurance companies cannot charge separately based on gender and therefore our analysis would determine if men or women are more prone to face medical issues that reflect in the healthcare insurance costing. However, our hypothesis was dismissed as gender did not turn out to be as influential and did not rank in the top three things that affected healthcare costs. Healthcare costs were mostly affected by the smoking status of the individual, followed by age, and then BMI. 
 
-It was interesting to find BMI to be one of the influential variables because BMI is not considered to be the best indicator of good health and is only a crude measure of the health status of an individual. BMI does not account for the body fat percentage or distribution. Moreover, there is speculation that BMI ranges were determined from data from white Europeans and therefore is not generalizable to all populations. It is said that blood pressure, waist circumference, and cholesterol levels are better indicators of health status of an individual^17^. But, BMI considers the weight of an individual, which is in control of the individual and therefore is an encouraging finding for our paper. Since there is a clear correlation between obesity and illnesses and it translates to increased healthcare costs, BMI change could contribute in reducing healthcare insurance prices for an individual for the future, irrespective of their age. 
-
-Our findings regarding age and smoking being definitive factors that affect the healthcare insurance pricing, aligns with the literature review.
-
-## Drawbacks and Limitations
-There are limitations and drawbacks of the dataset itself. First, the dataset has a low size and therefore any models built on top of it would not be dependable or representative of the population in any manner. There are four sections of the US that are all represented within roughly ~1339 rows. Moreover, the data is also skewed in the representativeness across age groups. Age groups of 18 and 19 years have ~68 and ~69 counts whereas the other age groups are between ~22 to ~30 counts. There is a good balance between the genders as men and women are equally represented in the dataset. However, there could be a difference in the data collection method, where they could have asked people their preferred gender instead of providing only two options of ‘men’ and ‘women’ because policies or business decisions have a direct effect on underrepresented communities like the transgender people^16^. Similarly, the four regions have been represented at 324 (northeast), 325 (northwest), 325(southwest), and 364 (southeast) counts. However, these samples are very small to infer anything at a larger scale and it is difficult to generalize any finding with such a small sample of people in the dataset. Finally, the dataset has not provided any information on the methodology of data collection, storage, processing, or purpose of creating this dataset. In the absence of this information it is difficult to understand the context and nature of the data. For example, if this is self reported data, it could be possible that some smokers could have answered the questions as being ‘non-smokers’ due to the stigma surrounding smoking as a habit. In such a case, the dataset would be non-dependable as the accuracy of the information would be questionable.
-
-# Conclusion
-## Policy/Business/Tech implications
-
-## Future work and limitations
-It would be interesting to explore at an older age, if BMI continues to affect the cost of healthcare insurance. Our current data analysis shows that both age and BMI play an important role in healthcare insurance pricing. However, at an early age it is clear that weight can be reduced and therefore avoid illnesses that could later cause a bump in pricing. However, at an older age, it would be interesting to find out how much BMI affects the pricing, and if it doesn’t, what factors influence the pricing. This would help understand what targeted interventions might be required for the eldery population.
-
-# References
-
-1.	Machine Learning in Healthcare: A Review - https://ieeexplore.ieee.org/abstract/document/8474918?casa_token=vs5rB2oeF7sAAAAA:d47DY_CRrzveZzUNJSDaYnlNqZLN054lFu8Pz1LMc-OpzV-IZBKteFOzGKMOTSpUZyjoU7Yi
-2.	Key Advances in Clinical Informatics; Chapter 19 - Machine Learning in Healthcare - https://www.sciencedirect.com/science/article/pii/B9780128095232000194
-3.	Kang, J. S., Kuznetsova, P., Luca, M. & Choi, Y. Where not to eat? Improving public policy by predicting hygiene inspections using online reviews. In Proc. 2013 Conference on Empirical Methods in Natural Language Processing 1443–1448 (Association for Computational Linguistics, 2013).
-4.	Chandler, D., Levitt, S. D. & List, J. A. Predicting and preventing shootings among at-risk youth. Am. Econ. Rev. 101, 288–292 (2011).
-5.	Big Data and Data Science in Critical Care - https://www.sciencedirect.com/science/article/abs/pii/S0012369218307256.
-6.	Athey, S. Beyond prediction: using big data for policy problems. Science 355, 483–485 (2017).
-7.	O’Neil, C. Weapons of Math Destruction: How Big Data Increases Inequality and Threatens Democracy (Broadway Books, New York, USA, 2016).
-8.	States Divided: The Implications of American Federalism for COVID-19 - https://onlinelibrary.wiley.com/doi/full/10.1111/puar.13243?casa_token=DJZythyJAP0AAAAA%3AmVCbaBPWY0ENhQIxCpUccxkpHpnXGu2F5QTt41hl16B0YtkuR8_RTu6oINxvFO7YsCeZ3fEqfrsEy9U.
-9.	Health Insurance Coverage in the United States: 2020 - https://www.census.gov/content/dam/Census/library/publications/2021/demo/p60-274.pdf.
-10.	Should All Americans Have the Right (Be Entitled) to Health Care? - https://healthcare.procon.org/.
-11.	Factors affecting healthcare costs - https://www.investopedia.com/how-much-does-health-insurance-cost-4774184.
-12.	U.S. Centers for Medicare & Medicaid Services. "How insurance companies set health premiums - https://www.healthcare.gov/how-plans-set-your-premiums/.
-13.	Affordable Care Act - https://www.investopedia.com/terms/a/affordable-care-act.asp#citation-11.
-14.	Cost of health insurance in the US - https://www.ehealthinsurance.com/resources/individual-and-family/how-much-does-individual-health-insurance-cost.
-15.	Census report on income and poverty in the US - https://www.census.gov/library/publications/2021/demo/p60-273.html.
-16.	Laws and transgender population - https://www.lgbtmap.org/equality-maps/healthcare_laws_and_policies.
-17.	BMI is not a good indicator of health - https://www.medicalnewstoday.com/articles/265215#Waist-size-linked-to-diabetes-risk,-regardless-of-BMI.
-
-```{r setup, include = TRUE, warning = FALSE, message = FALSE}
-
-```
