@@ -98,7 +98,7 @@ ggplot(insurance, aes(x=age, y=charges, colour = sex)) +
 insurance %>%
 ggplot( aes(x=age, y=charges, fill=sex)) +
   geom_bar(stat="identity", position = position_dodge()) +
-  labs(title="Title:Cost of Insurance (Female vs Male) ")
+  labs(title="Cost Differences by Gender")
 
 
 insurance %>%
@@ -122,7 +122,7 @@ ggplot( aes(x=age, y=charges)) +
 # display ages 
 ggplot(insurance, aes(x=age, y=charges, colour = sex)) +
   geom_smooth() +
-  labs(title="Title: Age vs Cost of Insurance")
+  labs(title="Age vs. Cost of Insurance")
 ```
 
 ```{r, warning = FALSE, message = FALSE}
@@ -555,10 +555,3 @@ test.mse <- mean(test.sq.rf)
 print(test.mse)
 
 ```
-
-
-
-
-
-
-
