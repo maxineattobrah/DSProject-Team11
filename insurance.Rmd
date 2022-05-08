@@ -590,7 +590,7 @@ for(numTree in numTrees) {
     mse.rf <- c(mse.rf, mean(val.sq.rf))
     
     if(mean(val.sq.rf) < lowestMSE) {
-      lowestMSE <- mse.rf
+      lowestMSE <- mean(val.sq.rf)
       selectedMTry <- numVars
       selectedTrees <- numTree
     }
