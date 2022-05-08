@@ -527,6 +527,7 @@ resid_e <- c(resid_e, predictions_e - y_test)
 ```
 ```{r, warning = FALSE, message = FALSE}
 
+library(rsample)
 # OLS 
 
 # install.packages("Metrics")
