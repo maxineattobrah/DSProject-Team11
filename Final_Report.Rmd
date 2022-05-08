@@ -52,6 +52,7 @@ The dataset we chose was already cleaned and transformed into rows of data with 
 
 ## Exploratory data analysis
 We explored the data to see if we can find  any biases in the data.
+
 1. We first analyzed the age of people in the dataset. This dataset contains young and old ages. There are more younger people in this dataset.
 2. Most people in this dataset do not smoke.
 3. There are about the same amount of men and women.
