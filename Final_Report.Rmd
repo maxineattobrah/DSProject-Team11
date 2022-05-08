@@ -145,7 +145,26 @@ There are limitations and drawbacks of the dataset itself. First, the dataset ha
 ## Future work and limitations
 It would be interesting to explore at an older age, if BMI continues to affect the cost of healthcare insurance. Our current data analysis shows that both age and BMI play an important role in healthcare insurance pricing. However, at an early age it is clear that weight can be reduced and therefore avoid illnesses that could later cause a bump in pricing. However, at an older age, it would be interesting to find out how much BMI affects the pricing, and if it doesn’t, what factors influence the pricing. This would help understand what targeted interventions might be required for the eldery population.
 
+# References
+References:
 
+1. Machine Learning in Healthcare: A Review - link
+2. Key Advances in Clinical Informatics; Chapter 19 - Machine Learning in Healthcare - link
+3. Kang, J. S., Kuznetsova, P., Luca, M. & Choi, Y. Where not to eat? Improving public policy by predicting hygiene inspections using online reviews. In Proc. 2013 Conference on Empirical Methods in Natural Language Processing 1443–1448 (Association for Computational Linguistics, 2013).
+4. Chandler, D., Levitt, S. D. & List, J. A. Predicting and preventing shootings among at-risk youth. Am. Econ. Rev. 101, 288–292 (2011).
+5. Big Data and Data Science in Critical Care - link.
+6. Athey, S. Beyond prediction: using big data for policy problems. Science 355, 483–485 (2017).
+7. O’Neil, C. Weapons of Math Destruction: How Big Data Increases Inequality and Threatens Democracy (Broadway Books, New York, USA, 2016).
+8. States Divided: The Implications of American Federalism for COVID-19 - link.
+9. Health Insurance Coverage in the United States: 2020 - link.
+10. Should All Americans Have the Right (Be Entitled) to Health Care? - link.
+11. Factors affecting healthcare costs - link.
+12. U.S. Centers for Medicare & Medicaid Services. "How insurance companies set health premiums - link.
+13. Affordable Care Act - link.
+14. Cost of health insurance in the US - link.
+15. Census report on income and poverty in the US - link.
+16. Laws and transgender population - link.
+17. BMI is not a good indicator of health - link.
 ```{r setup, include = TRUE, warning = FALSE, message = FALSE}
 
 ```
