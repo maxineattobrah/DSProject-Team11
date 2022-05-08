@@ -452,7 +452,7 @@ library(rsample)
 library('Metrics')
 
 # split 80 percent of data to train  and 20 percent to test
-split <- initial_split(insurance_dataChange_for_correlation, prop = .8)
+split <- rsample::initial_split(insurance_dataChange_for_correlation, prop = .8)
 
 # training data
 ins_trainData = training(split)
@@ -461,7 +461,7 @@ ins_trainData = training(split)
 ins_valData = testing(split)
 
 # linear regression using training data
-linear_model <- lm(charges ~ bmi + smoker + age, data =ins_trainData)
+linear_model <- lm(charges ~ bmi + smoker + age, data=ins_trainData)
 
 # predictions using validation data
 linear_model_predictions <- predict(linear_model, newx=ins_valData)
@@ -470,10 +470,10 @@ linear_model_predictions <- predict(linear_model, newx=ins_valData)
 (linear_model_summary <- summary(linear_model) )
 
 # mse using way taught in class
-mean(( ins_valData$charges - linear_model_predictions  )^2)
+print(mean((ins_valData$charges - linear_model_predictions  )^2))
 
 # mse using metric library
-mse(ins_valData$charges,linear_model_predictions)
+print(mse(ins_valData$charges, linear_model_predictions))
 
 ```
 
