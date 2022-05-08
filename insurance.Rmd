@@ -1,6 +1,6 @@
 ---
 title: "DS Project Team 11"
-author: "[Evan Patel, Daksh Verma, Saurabh Rane, Sujay Shah, Tejas Dighe, Maxine Attobrah]"
+author: "Daksh Verma(dverma), Evan Patel(epatel), Maxine Attobrah(mattobra), Saurabh Rane(sdrane), Sujay Shah(sujaysha), Tejas Dighe(tdighe)"
 output: pdf_document
 ---
 
