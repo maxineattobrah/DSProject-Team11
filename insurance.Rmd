@@ -447,7 +447,7 @@ ggplot(data=melted_correlation_matrix, aes(x=Var1, y=Var2, fill=value))+
 
 # OLS 
 
-# install.packages("Metrics")
+library(rsample)
 library('Metrics')
 
 ols.split.ratio <- c(0.5, 0.6, 0.7, 0.8)
@@ -466,7 +466,7 @@ for(ols.train.split in ols.split.ratio) {
   ins_valData = testing(split)
   
   # linear regression using training data
-  linear_model <- lm(charges ~ bmi + smoker + age, data=ins_trainData)
+  linear_model <- lm(log(charges) ~ bmi + smoker + age, data=ins_trainData)
   
   # predictions using validation data
   linear_model_predictions <- predict(linear_model, newx=ins_valData)
@@ -475,7 +475,7 @@ for(ols.train.split in ols.split.ratio) {
   print(linear_model_summary <- summary(linear_model) )
   
   #calculate mse
-  ols.mse <- c(ols.mse, mean((ins_valData$charges - linear_model_predictions  )^2))
+  ols.mse <- c(ols.mse, mean((log(ins_valData$charges) - linear_model_predictions  )^2))
 }
 
 #Output the MSE for each ratio
@@ -488,6 +488,19 @@ print(ols.mse)
 ```{r, warning = FALSE, message = FALSE}
 
 library(randomForest)
+
+insurance$log_charges = log(insurance$charges)
+set.seed(100) 
+index = sample(1:nrow(insurance), 0.8*nrow(insurance)) 
+train = insurance[index,] # Create the training data
+test = insurance[-index,] # Create the test data
+# Getting the independent variable
+x_train <- data.matrix(train[, c("smoker", "age", "bmi")])
+# Getting the dependent variable
+y_train <- data.matrix(train[,c("log_charges")])
+x_test <- data.matrix(train[, c("smoker", "age", "bmi")])
+# Getting the dependent variable
+y_test <- data.matrix(train[,c("log_charges")])
 
 print("Random Forest")
 samples <- rep(1:5, length.out = nrow(x_train))
