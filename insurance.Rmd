@@ -181,7 +181,7 @@ ggplot( aes(x=log(charges))) +
 
 # display regions and smoking habits 
 
-ggplot(insurance, aes(x=age, y=log(charges), colour = smoker)) +
+ggplot(insurance, aes(x=sex, y=log(charges), colour = smoker)) +
   geom_boxplot() +
   labs(title="Title: Age and Smoking Habits vs Log Cost of Insurance")
 ```
