@@ -1,7 +1,7 @@
 
 ---
 title: "Analysis of Insurance Cost on Patient Demographics"
-author: "[Daksh Verma, Evan Patel, Maxine Attobrah, Saurabh Rane, Sujay Shah, Tejas Dighe]"
+author: "Daksh Verma, Evan Patel, Maxine Attobrah, Saurabh Rane, Sujay Shah, Tejas Dighe"
 date: "May 8, 2022"
 output: pdf_document
 ---
@@ -32,45 +32,29 @@ As of 2020, the average cost of health insurance in the US was $456 per month fo
 
 # Data
 ## Information on the dataset
-This data is called the ‘​​Medical Cost Personal Datasets’ and the paper uses this publicly available dataset to build models.  The data for this paper was obtained from a website called www.kaggle.com which primarily hosts multiple data-sets across all domains including healthcare, finance, manufacturing, and agriculture, amongst others. The dataset is also associated with a book called ‘Machine Learning by R’ written by Brett Lantz. It seems that Packt Publishing used this dataset or similar dataset for teaching or conducting experiments. The dataset is small in size with only ~1339 rows, seems fairly straightforward, and needs cleaning and pre-processing. Exhibit 1 is a table that contains the columns along with their brief descriptions.
+This data is called the ‘​​Medical Cost Personal Datasets’ and the paper uses this publicly available dataset to build models.  The data for this paper was obtained from Kaggle, which primarily hosts multiple data-sets across all domains including healthcare, finance, manufacturing, and agriculture, amongst others. The dataset is also associated with a book called ‘Machine Learning by R’ written by Brett Lantz. It seems that Packt Publishing used this dataset or similar dataset for teaching or conducting experiments. The dataset is small in size with only ~1339 rows, seems fairly straightforward, and needs no cleaning or pre-processing. Exhibit 1 is a table that contains the columns along with their brief descriptions.
 
-### Columns from the ‘Medical Cost Personal Datasets’ dataset:
+![Columns from the ‘Medical Cost Personal Datasets’ dataset.](Final_Screenshots/data_features_table.png)
 
-1. Age: This column provides information about the age of the primary beneficiary who has the health insurance plan allocated to their name. This is recorded as the number of years. It has a numeric value.
-2. Sex: This column provides the gender of the insurance contractor with two choices, either male or female. It has a textual value.
-3. BMI: This column provides the body mass index (BMI) of the primary beneficiary. BMI is a ratio of height to weight and calculates if it is relatively high or low. The objective measure is weight in kilograms divided by the height in meters squared. It ranges between 18.5 to 24.9 and is used as a proxy for gauging the health status of an individual. It has a numeric value.
-4. Children: This column provides the number of children covered by health insurance or the number of dependents who are covered by the health insurance scheme. It has a numeric value.
-5. Smoker: This column provides the smoking status of the insurance beneficiary. It has a textual value.
-6. Region: This column provides the insurance beneficiaries residential area in the US. It is divided as the northeast, southeast, northwest, and northeast. It has a textual value.
-7. Charges: This column provides information on the individual medical costs billed by the health insurance scheme. It has a numeric value.
 
 ## Cleaning and transformation
 The dataset we chose was already cleaned and transformed into rows of data with the columns above. There was no missing data, which was useful for utilizing all of the dataset.
 
 ## Exploratory data analysis
-We explored the data to see if we can find  any biases in the data.
+First, we explored the data to see if we can find any biases in the data. We first analyzed the age of people in the dataset to find that the dataset contains a wide spectrum of age groups. However, the data dataset has more younger people than older people. We will comment on the effect of this bias in the discussion section if it is of any significance to our modeling efforts or results. Similarly, we found another bias in the quantum of individuals who smoke, as there are more non-smokers in the dataset. Finally, there are roughly the same number of men and women within this dataset (Refer to figure 1,2, and 3). Second, we looked at the relation between the age and payment for health insurance. We drew a line plot and observed that as a person gets older they are more likely to pay more in insurance regardless of their gender (Refer to figure 4 in the appendix). We also looked at the age v/s cost of insurance and we constructed a scatter plot for this purpose (Refer to figure 5). There was no clear observation whether the sex of an individual affects the cost of insurance. It seemed that from this graph gender may not play a role in the cost of medical insurance. It’s clear that some further analysis is needed (Refer to figure 6 in the appendix).
 
-1. We first analyzed the age of people in the dataset. This dataset contains young and old ages. There are more younger people in this dataset.
-2. Most people in this dataset do not smoke.
-3. There are about the same amount of men and women.
+![Age Distribution](Final_Screenshots/age_dist.png)
 
-### Line Plot
-4. From the plot we notice that as a person gets older the more likely they are to have to pay more in insurance regardless of their gender. 
-#graph
+![Smoker Distribution](Final_Screenshots/smoker_dist.png)
 
-### Scatter Plot
-5. From this scatter  plot we can see that it is not clear whether the sex of an individual affects the cost of insurance. It seems that from this graph gender may not play a role in the cost of medical insurance.  Some further analysis is needed.
-#graph
+![Gender Distribution](Final_Screenshots/gender_dist.png)
 
-### Bar Plot
-6. From this plot it seems that men pay higher in insurance most times
+![Healthcare Costs vs. Age and Gender](Final_Screenshots/age_gender_cost_dist.png)
 
-### Histograms Based on Gender
-7. The histograms for both men and women are both skewed to the right. This means that the majority of the people in the dataset are paying lower insurance costs. 
-#graph
-After taking the log transformation of the data we can clearly see that after about 9.6 there is a small amount of people paying higher insurance costs which is skewing the original data to the right. 
 
-### EDA needs to be edited in the file.
+In addition, we looked at the cost of Insurance (Female vs Male) and the bar plot in the figure 6 in the appendix shows that men might be paying higher in insurance most times than women. We then created histograms based on gender and both histograms are skewed to the right.  This means that the majority of the people in the dataset are paying lower insurance costs. After taking the log transformation of the data we can clearly see that after about 9.6 there is a small amount of people paying higher insurance costs which is skewing the original data to the right (refer to figure 7,8, 9, and 10 in the appendix). 
+We also looked at the cost of insurance based on age and smoking status. In the previous graph we noticed that there are alot of data points on top of each other. After using geom_jitter() and taking the log transform of the cost we can see very clearly that the people paying the most are smokers. The cost of insurance seems to be more influenced on whether or not a person smokes Majority of the people that do not smoke pay less in insurance. However, there are more people that do not smoke that have high insurance costs. Further investigation is needed to see why (refer to figure 11).
+
 
 
 # Methods

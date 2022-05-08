@@ -53,7 +53,7 @@ min(insurance$age)
 # display the varying ages
 ggplot(insurance, aes(x=age)) +
   geom_bar()+
-  labs(title="Title: Age")
+  labs(title="Age Distribution")
 
 ```
 
@@ -66,7 +66,7 @@ ggplot(insurance, aes(x=age)) +
 ggplot(insurance, aes(x=smoker)) +
   geom_bar()+
   geom_text(aes(label=stat(count)), stat="count", vjust=1.5, colour="red")+
-  labs(title="Title: Smokers")
+  labs(title="Smoker Distribution")
 
 ```
 
@@ -77,7 +77,7 @@ ggplot(insurance, aes(x=smoker)) +
 ggplot(insurance, aes(x=sex, colour = age)) +
   geom_bar()+
   geom_text(aes(label=stat(count)), stat="count", vjust=1.5, colour="red")+
-  labs(title="Title: Sex")
+  labs(title="Gender Distribution")
 
 ```
 
@@ -87,7 +87,7 @@ ggplot(insurance, aes(x=sex, colour = age)) +
 # display ages 
 ggplot(insurance, aes(x=age, y=charges, colour = sex)) +
   geom_point() +
-  labs(title="Title: Age vs Cost of Insuraunce")
+  labs(title="Age vs Cost of Insuraunce")
 ```
 
 
