@@ -228,7 +228,6 @@ ggplot(data = insurance) +
 
 ```
 
-
 ```{r message=FALSE, warning=TRUE}
 
 # prepare dataset for correlation matrix
@@ -269,9 +268,6 @@ ggplot(data=melted_correlation_matrix, aes(x=Var1, y=Var2, fill=value))+
 # Based on the result smoker has the strongest influencer. 
 
 ```
-
-
-
 
 ```{r, warning = FALSE, message = FALSE}
 
@@ -355,7 +351,6 @@ ggplot(data=melted_correlation_matrix, aes(x=Var1, y=Var2, fill=value))+
 
 ```
 
-
 ```{r, warning = FALSE, message = FALSE}
 
 # NORTHEAST
@@ -396,8 +391,6 @@ ggplot(data=melted_correlation_matrix, aes(x=Var1, y=Var2, fill=value))+
 # Regardless of sign, the higher the value the stronger the influence
 
 ```
-
-
 
 ```{r, warning = FALSE, message = FALSE}
 
@@ -440,9 +433,6 @@ ggplot(data=melted_correlation_matrix, aes(x=Var1, y=Var2, fill=value))+
 
 ```
 
-
-#### OLS
-
 ```{r, warning = FALSE, message = FALSE}
 
 # OLS 
@@ -482,8 +472,6 @@ for(ols.train.split in ols.split.ratio) {
 print(ols.mse)
 
 ```
-
-######## Random Forest
 
 ```{r, warning = FALSE, message = FALSE}
 
@@ -542,6 +530,21 @@ print(mse.rf)
 print(lowestMSE) 
 print(selectedMTry)
 print(selectedTrees)
+
+```
+
+```{r, warning = FALSE, message = FALSE}
+
+rf.results <- as.data.frame(list(
+  mtry = c(1,2,3,1,2,3,1,2,3,1,2,3,1,2,3),
+  rf_number_of_trees = c(100,200,300,400,500,100,200,300,400,500,100,200,300,400,500),
+  y = mse.rf))
+
+  ggplot(data = rf.results, aes(x=mtry, y=y, group=rf_number_of_trees, color=rf_number_of_trees)) +
+    geom_bar(stat="identity", aes(y = y, fill=rf_number_of_trees), position = "dodge") +
+    labs(title="Validation MSE of Random Forest Hyperparameters", 
+         x="Number of Variables Compared at Each Decision Split",
+         y="MSE")
 ```
 
 
