@@ -1,0 +1,14 @@
+---
+title: "Analysis of Insurance Cost on Patient Demographics"
+author: Sujay Shah, Saurabh Rane, Evan Patel, Maxine Attobrah, Daksh Verma, Tejas
+  Dighe
+date: '2022-05-08'
+output: pdf_document
+
+---
+
+#Place Image with ![Caption](path)
+
+```{r setup, include = TRUE, warning = FALSE, message = FALSE}
+
+```
