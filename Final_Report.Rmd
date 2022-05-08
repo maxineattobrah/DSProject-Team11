@@ -36,16 +36,15 @@ As of 2020, the average cost of health insurance in the US was $456 per month fo
 ## Information on the dataset
 This data is called the ‘​​Medical Cost Personal Datasets’ and the paper uses this publicly available dataset to build models.  The data for this paper was obtained from a website called www.kaggle.com which primarily hosts multiple data-sets across all domains including healthcare, finance, manufacturing, and agriculture, amongst others. The dataset is also associated with a book called ‘Machine Learning by R’ written by Brett Lantz. It seems that Packt Publishing used this dataset or similar dataset for teaching or conducting experiments. The dataset is small in size with only ~1339 rows, seems fairly straightforward, and needs cleaning and pre-processing. Exhibit 1 is a table that contains the columns along with their brief descriptions.
 
-### Exhibit 1: Columns from the ‘Medical Cost Personal Datasets’ dataset.
+### Columns from the ‘Medical Cost Personal Datasets’ dataset:
 
-```{r, results = "hide", message = FALSE, warning = FALSE, cache = TRUE, echo = FALSE}
-#library(tidyverse)
-#filename1 <- "https://docs.google.com/spreadsheets/d/1Kh9leQGqszJeRZEUSdhbbCsCq7xfLyJD/edit?usp=sharing&ouid=106115502650741087784&rtpof=true&sd=true"
-#(dataset_details <- read_csv(file = filename1, n_max = (8)))
-
-
-
-```
+1. Age: This column provides information about the age of the primary beneficiary who has the health insurance plan allocated to their name. This is recorded as the number of years. It has a numeric value.
+2. Sex: This column provides the gender of the insurance contractor with two choices, either male or female. It has a textual value.
+3. BMI: This column provides the body mass index (BMI) of the primary beneficiary. BMI is a ratio of height to weight and calculates if it is relatively high or low. The objective measure is weight in kilograms divided by the height in meters squared. It ranges between 18.5 to 24.9 and is used as a proxy for gauging the health status of an individual. It has a numeric value.
+4. Children: This column provides the number of children covered by health insurance or the number of dependents who are covered by the health insurance scheme. It has a numeric value.
+5. Smoker: This column provides the smoking status of the insurance beneficiary. It has a textual value.
+6. Region: This column provides the insurance beneficiaries residential area in the US. It is divided as the northeast, southeast, northwest, and northeast. It has a textual value.
+7. Charges: This column provides information on the individual medical costs billed by the health insurance scheme. It has a numeric value.
 
 ## Cleaning and transformation
 The dataset we chose was already cleaned and transformed into rows of data with the columns above. There was no missing data, which was useful for utilizing all of the dataset.
