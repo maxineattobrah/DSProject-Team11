@@ -445,35 +445,41 @@ ggplot(data=melted_correlation_matrix, aes(x=Var1, y=Var2, fill=value))+
 
 ```{r, warning = FALSE, message = FALSE}
 
-library(rsample)
 # OLS 
 
 # install.packages("Metrics")
 library('Metrics')
 
-# split 80 percent of data to train  and 20 percent to test
-split <- rsample::initial_split(insurance_dataChange_for_correlation, prop = .8)
+ols.split.ratio <- c(0.5, 0.6, 0.7, 0.8)
 
-# training data
-ins_trainData = training(split)
+ols.mse <- c()
 
-# validation data
-ins_valData = testing(split)
+for(ols.train.split in ols.split.ratio) {
 
-# linear regression using training data
-linear_model <- lm(charges ~ bmi + smoker + age, data=ins_trainData)
+  # split 80 percent of data to train  and 20 percent to test
+  split <- initial_split(insurance_dataChange_for_correlation, prop = ols.train.split)
+  
+  # training data
+  ins_trainData = training(split)
+  
+  # validation data
+  ins_valData = testing(split)
+  
+  # linear regression using training data
+  linear_model <- lm(charges ~ bmi + smoker + age, data=ins_trainData)
+  
+  # predictions using validation data
+  linear_model_predictions <- predict(linear_model, newx=ins_valData)
+  
+  # summary of linear model
+  print(linear_model_summary <- summary(linear_model) )
+  
+  #calculate mse
+  ols.mse <- c(ols.mse, mean((ins_valData$charges - linear_model_predictions  )^2))
+}
 
-# predictions using validation data
-linear_model_predictions <- predict(linear_model, newx=ins_valData)
-
-# summary of linear model
-(linear_model_summary <- summary(linear_model) )
-
-# mse using way taught in class
-print(mean((ins_valData$charges - linear_model_predictions  )^2))
-
-# mse using metric library
-print(mse(ins_valData$charges, linear_model_predictions))
+#Output the MSE for each ratio
+print(ols.mse)
 
 ```
 
