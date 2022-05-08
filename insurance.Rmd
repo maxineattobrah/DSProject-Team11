@@ -1,10 +1,14 @@
 ---
 title: "DS Project Team 11"
-author: "Daksh Verma(dverma), Evan Patel(epatel), Maxine Attobrah(mattobra), Saurabh Rane(sdrane), Sujay Shah(sujaysha), Tejas Dighe(tdighe)"
 output: pdf_document
 ---
 
-# DS Project Team 11
+\begin{center} 
+Team Members:
+Daksh Verma(dverma), Evan Patel(epatel), Maxine Attobrah(mattobra), 
+\newline
+Saurabh Rane(sdrane), Sujay Shah(sujaysha), Tejas Dighe(tdighe)
+ \end{center}
 
 
 ```{r setup, include = TRUE, warning = FALSE, message = FALSE}
