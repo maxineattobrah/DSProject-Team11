@@ -1,11 +1,16 @@
 
 ---
 title: "Analysis of Insurance Cost on Patient Demographics"
-author: "Daksh Verma(dverma), Evan Patel(epatel), Maxine Attobrah(mattobra), Saurabh Rane(sdrane), Sujay Shah(sujaysha), Tejas Dighe(tdighe)"
 date: "May 8, 2022"
 output: pdf_document
 ---
 
+\begin{center} 
+Team Members:
+Daksh Verma(dverma), Evan Patel(epatel), Maxine Attobrah(mattobra), 
+\newline
+Saurabh Rane(sdrane), Sujay Shah(sujaysha), Tejas Dighe(tdighe)
+\end{center}
 
 # Abstract
 
