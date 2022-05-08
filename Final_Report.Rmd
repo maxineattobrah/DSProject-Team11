@@ -99,10 +99,9 @@ A linear regression model makes 5 assumptions which are the Gauss Markov assumpt
 The second model chosen was a random forest regression model to predict the insurance charges based on a select subset of features in the dataset. Random forest is a type of ensemble method that combines multiple decision trees that uses a technique called bagging to use random subsets of features at each decision node on each tree, then combines the results to predict regression values. Random forest models are useful because the volume of uncorrelated models helps reduce variance by avoiding overfitting training data. A random forest model can help better understand which variable(s) are best to split on first and which variables are good predictors only after another variable is determined.
 
 ## Expected Model Performance
-### In terms of OLS and the Gauss Markov conditions:
-
-Linearity: We can not test that the independent variables and the dependent have a  linear relationship. However, we believe that it is reasonable to assume that these parameters will have a linear relationship
-
+In terms of OLS and the Gauss Markov conditions:
+-------------------------------------------------------
+* Linearity: We can not test that the independent variables and the dependent have a  linear relationship. However, we believe that it is reasonable to assume that these parameters will have a linear relationship
 * Random sampling: There is no information on data that states whether the data was randomly sampled. 
 * Non-colinearity: From our correlation matrix we did not see a huge correlation between any of the dependent variables.There could be some omitted variables that could affect some of the predictor variables but the cost of insurance and vice versa.
 * Homoscedasticity: We assume that there is no huge change in error for each predictor variable
@@ -145,25 +144,25 @@ There are limitations and drawbacks of the dataset itself. First, the dataset ha
 It would be interesting to explore at an older age, if BMI continues to affect the cost of healthcare insurance. Our current data analysis shows that both age and BMI play an important role in healthcare insurance pricing. However, at an early age it is clear that weight can be reduced and therefore avoid illnesses that could later cause a bump in pricing. However, at an older age, it would be interesting to find out how much BMI affects the pricing, and if it doesn’t, what factors influence the pricing. This would help understand what targeted interventions might be required for the eldery population.
 
 # References
-References:
 
-1. Machine Learning in Healthcare: A Review - link
-2. Key Advances in Clinical Informatics; Chapter 19 - Machine Learning in Healthcare - link
-3. Kang, J. S., Kuznetsova, P., Luca, M. & Choi, Y. Where not to eat? Improving public policy by predicting hygiene inspections using online reviews. In Proc. 2013 Conference on Empirical Methods in Natural Language Processing 1443–1448 (Association for Computational Linguistics, 2013).
-4. Chandler, D., Levitt, S. D. & List, J. A. Predicting and preventing shootings among at-risk youth. Am. Econ. Rev. 101, 288–292 (2011).
-5. Big Data and Data Science in Critical Care - link.
-6. Athey, S. Beyond prediction: using big data for policy problems. Science 355, 483–485 (2017).
-7. O’Neil, C. Weapons of Math Destruction: How Big Data Increases Inequality and Threatens Democracy (Broadway Books, New York, USA, 2016).
-8. States Divided: The Implications of American Federalism for COVID-19 - link.
-9. Health Insurance Coverage in the United States: 2020 - link.
-10. Should All Americans Have the Right (Be Entitled) to Health Care? - link.
-11. Factors affecting healthcare costs - link.
-12. U.S. Centers for Medicare & Medicaid Services. "How insurance companies set health premiums - link.
-13. Affordable Care Act - link.
-14. Cost of health insurance in the US - link.
-15. Census report on income and poverty in the US - link.
-16. Laws and transgender population - link.
-17. BMI is not a good indicator of health - link.
+1.	Machine Learning in Healthcare: A Review - https://ieeexplore.ieee.org/abstract/document/8474918?casa_token=vs5rB2oeF7sAAAAA:d47DY_CRrzveZzUNJSDaYnlNqZLN054lFu8Pz1LMc-OpzV-IZBKteFOzGKMOTSpUZyjoU7Yi
+2.	Key Advances in Clinical Informatics; Chapter 19 - Machine Learning in Healthcare - https://www.sciencedirect.com/science/article/pii/B9780128095232000194
+3.	Kang, J. S., Kuznetsova, P., Luca, M. & Choi, Y. Where not to eat? Improving public policy by predicting hygiene inspections using online reviews. In Proc. 2013 Conference on Empirical Methods in Natural Language Processing 1443–1448 (Association for Computational Linguistics, 2013).
+4.	Chandler, D., Levitt, S. D. & List, J. A. Predicting and preventing shootings among at-risk youth. Am. Econ. Rev. 101, 288–292 (2011).
+5.	Big Data and Data Science in Critical Care - https://www.sciencedirect.com/science/article/abs/pii/S0012369218307256.
+6.	Athey, S. Beyond prediction: using big data for policy problems. Science 355, 483–485 (2017).
+7.	O’Neil, C. Weapons of Math Destruction: How Big Data Increases Inequality and Threatens Democracy (Broadway Books, New York, USA, 2016).
+8.	States Divided: The Implications of American Federalism for COVID-19 - https://onlinelibrary.wiley.com/doi/full/10.1111/puar.13243?casa_token=DJZythyJAP0AAAAA%3AmVCbaBPWY0ENhQIxCpUccxkpHpnXGu2F5QTt41hl16B0YtkuR8_RTu6oINxvFO7YsCeZ3fEqfrsEy9U.
+9.	Health Insurance Coverage in the United States: 2020 - https://www.census.gov/content/dam/Census/library/publications/2021/demo/p60-274.pdf.
+10.	Should All Americans Have the Right (Be Entitled) to Health Care? - https://healthcare.procon.org/.
+11.	Factors affecting healthcare costs - https://www.investopedia.com/how-much-does-health-insurance-cost-4774184.
+12.	U.S. Centers for Medicare & Medicaid Services. "How insurance companies set health premiums - https://www.healthcare.gov/how-plans-set-your-premiums/.
+13.	Affordable Care Act - https://www.investopedia.com/terms/a/affordable-care-act.asp#citation-11.
+14.	Cost of health insurance in the US - https://www.ehealthinsurance.com/resources/individual-and-family/how-much-does-individual-health-insurance-cost.
+15.	Census report on income and poverty in the US - https://www.census.gov/library/publications/2021/demo/p60-273.html.
+16.	Laws and transgender population - https://www.lgbtmap.org/equality-maps/healthcare_laws_and_policies.
+17.	BMI is not a good indicator of health - https://www.medicalnewstoday.com/articles/265215#Waist-size-linked-to-diabetes-risk,-regardless-of-BMI.
+
 ```{r setup, include = TRUE, warning = FALSE, message = FALSE}
 
 ```
